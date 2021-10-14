@@ -6,7 +6,7 @@ use PayPal\IPN\Event\IPNInvalid;
 use PayPal\IPN\Event\IPNVerificationFailure;
 use PayPal\IPN\Event\IPNVerified;
 use PayPal\IPN\Exception\ServiceException;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface as EventDispatcher;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface as EventDispatcher;
 
 class IPNListener
 {
@@ -65,7 +65,7 @@ class IPNListener
             $event = new IPNVerificationFailure($message, $e->getMessage());
         }
 
-        $this->eventDispatcher->dispatch($eventName, $event);
+        $this->eventDispatcher->dispatch($event, $eventName);
     }
 
     /**
